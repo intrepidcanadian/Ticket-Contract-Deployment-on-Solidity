@@ -4,30 +4,80 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
+
+// const { ethers } = require("hardhat");
+
+// const gasLimit = 10000000;
+
+// async function main() {
+//   const whitelistContract = await ethers.getContractFactory("Whitelist");
+//   const deployedWhitelistContract = await whitelistContract.deploy(10, {
+//     gasLimit: gasLimit,
+//   });
+//   await deployedWhitelistContract.deployed();
+//   console.log("Whitelist Contract Address", deployedWhitelistContract.address);
+// }
+
+// main()
+//   .then(()=> process.exit(0))
+//   .catch ((error) => {
+//   console.error(error);
+//   process.exit(1);
+// });
+
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  /*
+  DeployContract in ethers.js is an abstraction used to deploy new smart contracts,
+  so whitelistContract here is a factory for instances of our Whitelist contract.
+  */
+  // here we deploy the contract
+const whitelistContract = await hre.ethers.deployContract("Whitelist", [10]);
+// 10 is the Maximum number of whitelisted addresses allowed
 
-  const lockedAmount = hre.ethers.parseEther("0.001");
+// wait for the contract to deploy
+await whitelistContract.waitForDeployment();
 
-  const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
-
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+// print the address of the deployed contract
+console.log("Whitelist Contract Address:", whitelistContract.target);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+// Call the main function and catch if there is any error
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+
+
+
+
+// const hre = require("hardhat");
+
+// async function main() {
+//   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
+//   const unlockTime = currentTimestampInSeconds + 60;
+
+//   const lockedAmount = hre.ethers.parseEther("0.001");
+
+//   const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
+//     value: lockedAmount,
+//   });
+
+//   await lock.waitForDeployment();
+
+//   console.log(
+//     `Lock with ${ethers.formatEther(
+//       lockedAmount
+//     )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
+//   );
+// }
+
+// // We recommend this pattern to be able to use async/await everywhere
+// // and properly handle errors.
+// main().catch((error) => {
+//   console.error(error);
+//   process.exitCode = 1;
+// });
