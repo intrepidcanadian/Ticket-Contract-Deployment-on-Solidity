@@ -24,6 +24,10 @@
 //   console.error(error);
 //   process.exit(1);
 // });
+//determine how to link to hardhat library
+//why do i need ethers
+
+
 
 const hre = require("hardhat");
 
@@ -50,6 +54,8 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+
 
 
 

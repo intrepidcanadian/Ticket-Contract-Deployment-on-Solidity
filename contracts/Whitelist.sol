@@ -4,6 +4,8 @@ pragma solidity ^0.8.4;
 
 contract Whitelist {
 
+    // Creating a variable to store the max number of addresses that can be whitelisted
+
     // Max number of whitelisted addresses allowed
     uint8 public maxWhitelistedAddresses;
 
