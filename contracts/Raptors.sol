@@ -5,21 +5,21 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IWhitelist.sol";
 
-contract CryptoDevs is ERC721Enumerable, Ownable {
+contract RaptorTickets is ERC721Enumerable, Ownable {
     /**
       * @dev _baseTokenURI for computing {tokenURI}. If set, the resulting URI for each
       * token will be the concatenation of the `baseURI` and the `tokenId`.
       */
     string _baseTokenURI;
 
-    //  _price is the price of one Crypto Dev NFT
-    uint256 public _price = 0.01 ether;
+    //  _price is the price of one Raptors Ticket NFT
+    uint256 public _price = 10 ether;
 
     // _paused is used to pause the contract in case of an emergency
     bool public _paused;
 
     // max number of CryptoDevs
-    uint256 public maxTokenIds = 20;
+    uint256 public maxTokenIds = 10;
 
     // total number of tokenIds minted
     uint256 public tokenIds;
@@ -44,7 +44,7 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
       * Constructor for Crypto Devs takes in the baseURI to set _baseTokenURI for the collection.
       * It also initializes an instance of whitelist interface.
       */
-    constructor (string memory baseURI, address whitelistContract) ERC721("Crypto Devs", "CD") {
+    constructor (string memory baseURI, address whitelistContract) ERC721("Raptors", "RT") {
         _baseTokenURI = baseURI;
         whitelist = IWhitelist(whitelistContract);
     }
@@ -56,7 +56,7 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
         presaleStarted = true;
         // Set presaleEnded time as current timestamp + 5 minutes
         // Solidity has cool syntax for timestamps (seconds, minutes, hours, days, years)
-        presaleEnded = block.timestamp + 5 minutes;
+        presaleEnded = block.timestamp + 2 minutes;
     }
 
     /**
@@ -79,7 +79,7 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
     */
     function mint() public payable onlyWhenNotPaused {
         require(presaleStarted && block.timestamp >=  presaleEnded, "Presale has not ended yet");
-        require(tokenIds < maxTokenIds, "Exceed maximum Crypto Devs supply");
+        require(tokenIds < maxTokenIds, "Exceed maximum Raptors supply");
         require(msg.value >= _price, "Ether sent is not correct");
         tokenIds += 1;
         _safeMint(msg.sender, tokenIds);

@@ -1,10 +1,10 @@
 const hre = require("hardhat");
 require("dotenv").config({ path: ".env" });
-const { WHITELIST_CONTRACT_ADDRESS, METADATA_URL } = require("../constants");
+const { newWhitelist_address, METADATA_URL } = require("../constants");
 
 async function main() {
   // Address of the whitelist contract that you deployed in the previous module
-  const whitelistContract = WHITELIST_CONTRACT_ADDRESS;
+  const whitelistContract = newWhitelist_address;
   // URL from where we can extract the metadata for a Crypto Dev NFT
   const metadataURL = METADATA_URL;
   /*
@@ -13,7 +13,7 @@ async function main() {
   */
 
  // here we deploy the contract
- const cryptoDevsContract = await hre.ethers.deployContract("CryptoDevs", [
+ const cryptoDevsContract = await hre.ethers.deployContract("RaptorTickets", [
    metadataURL,
    whitelistContract
  ]);
@@ -22,7 +22,7 @@ async function main() {
  await cryptoDevsContract.waitForDeployment();
 
  // print the address of the deployed contract
- console.log("Crypto Devs Contract Address:", cryptoDevsContract.target);
+ console.log("Raptors Contract Address:", cryptoDevsContract.target);
 }
 
 // Call the main function and catch if there is any error
