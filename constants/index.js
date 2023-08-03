@@ -1311,8 +1311,9 @@ const newWhitelist_abi = [
   }
 ];
 
-const newWhitelist_address = "0x5cd615E655aBAeb7f040e34607DAC3D9A56A7784";
+// const newWhitelist_address = "0x5cd615E655aBAeb7f040e34607DAC3D9A56A7784";
 
+const newWhitelist_address = "0x8Aa7516A4C338A4b7938787Eca328C161b3Fa70a"
 
 // URL to extract Metadata for a Crypto Dev NFT
 const METADATA_URL = "https://raw.githubusercontent.com/intrepidcanadian/nftserver/main/assets/players/";

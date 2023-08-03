@@ -6,7 +6,7 @@ async function main() {
   so whitelistContract here is a factory for instances of our Whitelist contract.
   */
   // here we deploy the contract
-const whitelistContract = await hre.ethers.deployContract("Whitelist", [10]);
+const whitelistContract = await hre.ethers.deployContract("Whitelist", [5]);
 // 10 is the Maximum number of whitelisted addresses allowed
 
 // wait for the contract to deploy

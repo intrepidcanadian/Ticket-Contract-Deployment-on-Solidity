@@ -44,7 +44,7 @@ contract RaptorTickets is ERC721Enumerable, Ownable {
       * Constructor for Crypto Devs takes in the baseURI to set _baseTokenURI for the collection.
       * It also initializes an instance of whitelist interface.
       */
-    constructor (string memory baseURI, address whitelistContract) ERC721("Raptors", "RT") {
+    constructor (string memory baseURI, address whitelistContract) ERC721("Raptors", "RS") {
         _baseTokenURI = baseURI;
         whitelist = IWhitelist(whitelistContract);
     }
