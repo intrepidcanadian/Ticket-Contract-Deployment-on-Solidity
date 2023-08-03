@@ -18,8 +18,8 @@ contract RaptorTickets is ERC721Enumerable, Ownable {
     // _paused is used to pause the contract in case of an emergency
     bool public _paused;
 
-    // max number of CryptoDevs
-    uint256 public maxTokenIds = 10;
+    // max number of Raptor Tickets
+    uint256 public maxTokenIds = 30;
 
     // total number of tokenIds minted
     uint256 public tokenIds;
@@ -40,8 +40,6 @@ contract RaptorTickets is ERC721Enumerable, Ownable {
 
     /**
       * @dev ERC721 constructor takes in a `name` and a `symbol` to the token collection.
-      * name in our case is `Crypto Devs` and symbol is `CD`.
-      * Constructor for Crypto Devs takes in the baseURI to set _baseTokenURI for the collection.
       * It also initializes an instance of whitelist interface.
       */
     constructor (string memory baseURI, address whitelistContract) ERC721("Raptors", "RS") {
@@ -65,7 +63,7 @@ contract RaptorTickets is ERC721Enumerable, Ownable {
     function presaleMint() public payable onlyWhenNotPaused {
         require(presaleStarted && block.timestamp < presaleEnded, "Presale is not running");
         require(whitelist.whitelistedAddresses(msg.sender), "You are not whitelisted");
-        require(tokenIds < maxTokenIds, "Exceeded maximum Crypto Devs supply");
+        require(tokenIds < maxTokenIds, "Exceeded maximum Raptors Devs supply");
         require(msg.value >= _price, "Ether sent is not correct");
         tokenIds += 1;
         //_safeMint is a safer version of the _mint function as it ensures that
